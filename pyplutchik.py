@@ -1192,7 +1192,8 @@ def plutchik(scores,
              height_width_ratio = 1, 
              title = None, 
              title_size = None,
-             normalize = False):
+             normalize = False
+             tags=None): 
     """
     Draw the petal and its possible sections.
     Full details at http://www.github.com/alfonsosemeraro/plutchik/tutorial.ipynb
@@ -1274,8 +1275,6 @@ def plutchik(scores,
     if not font:
         font = 'sans-serif'
         
-    
-    
     # Draw coordinates (if needed) before any petal
     if show_coordinates:
         _polar_coordinates(ax, font, fontweight, fontsize, show_ticklabels, ticklabels_angle, ticklabels_size)
@@ -1348,5 +1347,14 @@ def plutchik(scores,
     
     if title:
         ax.set_title(title, fontfamily = font, fontsize = title_size, fontweight = 'bold', pad = 20)
-        
+
+    if tags:
+        # Position tags just below the title
+        title_pad = 20  # This should match or relate to the pad used in ax.set_title
+        title_height_estimate = title_size * 0.03  # Estimate the height of the title (adjust as needed)
+        initial_tag_y_position = 1 - title_height_estimate - (title_pad / ax.figure.get_size_inches()[1])
+    
+        for i, tag in enumerate(tags):
+            ax.text(0.5, initial_tag_y_position - (i * 0.05), tag, fontsize=fontsize, fontfamily=font, ha='center', transform=ax.transAxes)
+    
     return ax
