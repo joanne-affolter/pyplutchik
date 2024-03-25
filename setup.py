@@ -8,7 +8,6 @@ setup(
         'Shapely==1.7.1',
         'numpy==1.17.4',
         'matplotlib==3.3.2',
-        'descartes==1.1.0'
     ],
     # Include other arguments as needed
 )
